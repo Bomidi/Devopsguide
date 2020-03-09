@@ -1,0 +1,14 @@
+Interview Questions:
+
+1.How to hide nexus username and password
+2.In Linux what is the command to deny access of an user.
+3.Difference between freestyle and pipeline job
+4.How to do versioning in nexus
+5.What is the structure of ci CD pipeline
+6.Where u will deploy a war file and how
+7.Difference between unit and function testing..When these testing are done
+9.Unit testing tool
+10.What does ELB do
+11.What does the dev team do in ur project
+12.What is the use of nodes in jenkins
+

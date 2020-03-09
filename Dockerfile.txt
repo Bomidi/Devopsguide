@@ -1,0 +1,119 @@
+
+
+The Docker File System:
+
+    In order to understand Docker volumes, it is important to first understand how the Docker file system works.
+
+    A Docker image is a collection of read-only layers. When you launch a container from an image, Docker adds a 
+    read-write layer to the top of that stack of read-only layers. Docker calls this the Union File System
+
+    Any time a file is changed, Docker makes a copy of the file from the read-only layers up into the top 
+    read-write layer. This leaves the original (read-only) file unchanged.
+
+    When a container is deleted, that top read-write layer is lost. This means that any changes made after 
+    the container was launched are now gone.
+
+Docker-volumes:
+
+Adv: Easy and fast
+DisAdv: we cant create specified path volume. docker assigns a path like default
+
+docker volume create data-tool --> to create a docker volume for containers
+
+docker run -it --name dockervolume -v data-tools:/opt/data ubuntu /bin/bash --> attaching volume to the container
+
+docker volume ls  --> list of all volumes
+
+docker volume inspect data-tools --> it shows the path of the folder and other information using json format
+
+docker volume rm data-tools
+
+you cant remove volume from running container either you have to stop the container or delete the container.
+
+docker stop container
+docker rm container
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dockerfile
+
+1. Dokerfile:
+       It is a text file and it contains set of instructions to build a docker image.
+    
+    DockerBasic Commands
+        FROM --> used to download a image form Docker Hub
+                FROM ubuntu
+
+                First non-commit instructions , FROM will appear multiple times for multiple images
+
+        MAINTAINER --> Simply used it as author name
+                        MAINTAINER gopinadh@satnavtech.com
+        
+        RUN --> it is a shell form  
+                The command RUN in a shell 
+                Linux --> /bin/sh -c
+                Windows --> cmd /S /C
+                
+                RUN ["executable", "<param 1>", "<param 2>"]
+
+                RUN apt insall apache2
+        
+        CMD --> it is execute the runtime command when container executes
+                CMD ["executable", "<param 1>", "<param 2>"]
+
+                CMD ["apache2ctl", "-D", "FOREGROUND"]
+
+
+        ENTRYPOINT -->     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doker-compose:
+    --> Is a file in yaml format where you define the different services involved in your application such as 
+        web,database,orchastration etc
+
+        docker-compose.yml
+
+        services:
+            web:
+                image: "ubuntu"
+                ports:
+                    - "80:8080"
+            Database:
+                image: "mysql"
+                volumes:
+                    - /opt/data:/var/lib/mysql
+
+
+    docker-compose up
+
+    docker-compose down
+
+    docker-compose stop
+
