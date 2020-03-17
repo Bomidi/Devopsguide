@@ -1,1 +1,48 @@
 
+custom inventory host file ping 
+
+#inventory=/etc/ansible/host  --> disable inventory file from .cfg file
+
+create a new host file in required location
+
+ansadmin@mint-os # nano hosts
+[webserver]
+10.160.0.5
+10.160.0.8
+
+ansadmin@mint-os # ansible -m ping -u ansadmin -i hosts webserver
+
+10.160.0.5 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+
+-m --> module 
+-u --> user
+-i --> inventory
+
+ansadmin@mint-os # ansible -b -a "sudo cat /etc/os-release" -u ansadmin -i hosts webserver
+10.160.0.5 | CHANGED | rc=0 >>
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+
+
+
